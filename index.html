@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mollah Zone — Modest fashion for every woman</title>
+  <style>
+    /* ====== Reset & base ====== */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{font-family: "Helvetica Neue", Arial, sans-serif;color:#222;background:#fff}
+    a{color:inherit;text-decoration:none}
+
+    /* ====== Colors & variables ====== */
+    :root{
+      --primary:#ff7a00; /* orange */
+      --dark:#111;
+      --muted:#f5f5f5;
+      --accent:#222;
+      --container:1200px;
+    }
+
+    /* ====== Container ====== */
+    .container{max-width:var(--container);margin:0 auto;padding:0 16px}
+
+    /* ====== Top bar / header ====== */
+    .topbar{background:var(--dark);color:#fff;padding:10px 0;font-size:14px}
+    .topbar .container{display:flex;justify-content:space-between;align-items:center}
+    .topbar .left{display:flex;gap:12px;align-items:center}
+    .topbar .right{display:flex;gap:12px;align-items:center}
+    .topbar small{opacity:.85}
+
+    header.site-header{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:40}
+    .site-header .container{display:flex;align-items:center;gap:20px;padding:14px 16px}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.5px}
+    .logo .mark{background:var(--primary);color:#fff;padding:8px 10px;border-radius:6px;font-weight:800}
+    .searchbar{flex:1;display:flex;align-items:center;gap:8px}
+    .searchbar input{flex:1;padding:10px 12px;border-radius:6px;border:1px solid #ddd;font-size:15px}
+    .searchbar button{padding:10px 14px;border-radius:6px;border:0;background:var(--primary);color:#fff;cursor:pointer}
+
+    .icons{display:flex;gap:12px;align-items:center}
+    .icons button{background:transparent;border:0;cursor:pointer;font-size:18px}
+
+    /* ====== Nav ====== */
+    nav.main-nav{background:#0f0f0f;color:#fff}
+    nav.main-nav .container{display:flex;gap:18px;overflow:auto;padding:10px 16px}
+    nav.main-nav a{padding:8px 10px;white-space:nowrap;font-size:14px;opacity:.95}
+
+    /* ====== Hero slider ====== */
+    .hero{background:var(--muted);padding:28px 0}
+    .hero .container{display:flex;gap:20px;align-items:center}
+    .hero .left{flex:1}
+    .hero .right{flex:1;display:flex;justify-content:center}
+    .hero-card{background:#fff;border-radius:8px;padding:22px;box-shadow:0 6px 18px rgba(0,0,0,.06);max-width:720px;width:100;position:relative}
+    .hero-card h1{font-size:28px;margin-bottom:12px}
+    .hero-card p{color:#666;margin-bottom:16px}
+    .cta{background:var(--primary);color:#fff;padding:10px 16px;border-radius:8px;display:inline-block}
+
+    /* Slider small dots */
+    .dots{display:flex;gap:8px;align-items:center;margin-top:10px}
+    .dot{width:10px;height:10px;border-radius:50%;background:#ddd}
+    .dot.active{background:var(--primary)}
+
+    /* ====== Product grid ====== */
+    .section{padding:28px 0}
+    .section h2{font-size:22px;margin-bottom:16px;text-align:center}
+    .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .card{background:#fff;border-radius:10px;padding:12px;border:1px solid #f0f0f0;box-shadow:0 6px 18px rgba(0,0,0,.04);display:flex;flex-direction:column;gap:10px}
+    .card img{width:100%;height:220px;object-fit:cover;border-radius:8px}
+    .badge{position:absolute;background:var(--primary);color:#fff;padding:6px 8px;border-radius:6px;font-size:12px;transform:rotate(-10deg)}
+    .prod-title{font-weight:600}
+    .price{color:var(--primary);font-weight:700}
+    .card .meta{display:flex;justify-content:space-between;align-items:center}
+
+    /* ====== Offer strip ====== */
+    .offer-strip{background:linear-gradient(90deg,#fff7ec,#fff);padding:18px;border-radius:8px;border:1px solid #fde1c7;display:flex;align-items:center;gap:16px;justify-content:space-between}
+
+    /* ====== Floating actions ====== */
+    .floating-chat{position:fixed;right:18px;bottom:18px;background:var(--primary);color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.18);cursor:pointer;z-index:60}
+    .whatsapp{position:fixed;right:18px;bottom:88px;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.18);cursor:pointer;z-index:60}
+
+    /* ====== Footer ====== */
+    footer{background:#0f0f0f;color:#fff;padding:26px 0;margin-top:28px}
+    footer .container{display:flex;gap:20px;flex-wrap:wrap}
+    footer .col{flex:1;min-width:180px}
+
+    /* ====== Responsive ====== */
+    @media (max-width:1000px){ .product-grid{grid-template-columns:repeat(3,1fr)} }
+    @media (max-width:800px){ .product-grid{grid-template-columns:repeat(2,1fr)} .hero .container{flex-direction:column} .hero .right{order:-1} }
+    @media (max-width:520px){
+      .product-grid{grid-template-columns:1fr}
+      .site-header .container{flex-wrap:wrap}
+      .searchbar{order:3;width:100%}
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- top info -->
+  <div class="topbar">
+    <div class="container">
+      <div class="left"><small>Free shipping over ৳1500 • Cash on delivery available</small></div>
+      <div class="right"><small>Call: 0171XXXXXXX • WhatsApp: 0171XXXXXXX</small></div>
+    </div>
+  </div>
+
+  <!-- header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="logo">
+        <div class="mark">MZ</div>
+        <div>
+          <div style="font-size:18px;font-weight:800">Mollah Zone</div>
+          <div style="font-size:12px;color:#666">Modest fashion for every woman</div>
+        </div>
+      </div>
+
+      <div class="searchbar" role="search">
+        <input id="searchInput" placeholder="প্রোডাক্ট সার্চ করুন — যেমন: বোরকা, নিকাব, আবায়া…" />
+        <button id="searchBtn">Search</button>
+      </div>
+
+      <div class="icons">
+        <button title="Offers">🎁</button>
+        <button title="Store Locator">📍</button>
+        <button title="Cart">🛒</button>
+        <button title="Account">👤</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- nav -->
+  <nav class="main-nav" aria-label="Main Navigation">
+    <div class="container">
+      <a href="#">Home</a>
+      <a href="#">Burqa</a>
+      <a href="#">Abaya</a>
+      <a href="#">Hijab</a>
+      <a href="#">Accessories</a>
+      <a href="#">New Arrival</a>
+      <a href="#">Offers</a>
+      <a href="#">Contact</a>
+    </div>
+  </nav>
+
+  <!-- hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="left">
+        <div class="hero-card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <h1>নতুন কलेकশন ২০২৫ • মোল্লাহ জোন</h1>
+              <p>আরামদায়ক, মার্জিত ও ট্রেন্ডি — প্রতিটি নারীকে লক্ষ্য করে তৈরি। অর্ডার করুন এখনই।</p>
+              <a class="cta" href="#">Shop Now</a>
+            </div>
+            <div style="position:relative">
+              <img src="https://via.placeholder.com/280x220.png?text=Featured" alt="featured product" style="border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,.08);">
+              <div class="badge" style="top:14px;right:-24px;position:absolute">NEW</div>
+            </div>
+          </div>
+
+          <div class="dots" id="dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right">
+        <div style="width:100%;max-width:360px">
+          <div class="offer-strip">
+            <div>
+              <strong>Special Offer</strong><br>
+              <small>মুখ্য অফার: ২৫% ছাড় প্রথম ১০০টি অর্ডারে</small>
+            </div>
+            <div><a class="cta" href="#">Claim</a></div>
+          </div>
+
+          <div style="height:16px"></div>
+
+          <div class="card" style="padding:10px">
+            <img src="https://via.placeholder.com/320x180.png?text=Shop+Banner" alt="">
+            <div style="font-weight:700;margin-top:8px">Fast Delivery • Secure Payment</div>
+            <div style="color:#666;font-size:13px">Bkash, Nagad, Bank Transfer, Card</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- products -->
+  <section class="section">
+    <div class="container">
+      <h2>Exclusive</h2>
+      <div class="product-grid" id="productGrid">
+        <!-- JS will populate product cards -->
+      </div>
+    </div>
+  </section>
+
+  <!-- another section -->
+  <section class="section">
+    <div class="container">
+      <h2>New Arrivals</h2>
+      <div class="product-grid" id="newGrid"></div>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer>
+    <div class="container">
+      <div class="col">
+        <h3>Mollah Zone</h3>
+        <p>Modest fashion for every woman. কাস্টমার কেয়ার: 0171XXXXXXX</p>
+      </div>
+      <div class="col">
+        <h4>Useful Links</h4>
+        <ul style="list-style:none;margin-top:8px;line-height:1.8">
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Return Policy</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4>Payment</h4>
+        <p>Bkash, Nagad, Card, Bank Transfer</p>
+      </div>
+      <div class="col">
+        <h4>Follow</h4>
+        <p>Facebook • Instagram • YouTube</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- floating actions -->
+  <div class="whatsapp" title="WhatsApp" onclick="openWhatsApp()">
+    <!-- simple phone emoji -->
+    💬
+  </div>
+  <div class="floating-chat" title="Chat">
+    💬
+  </div>
+
+  <script>
+    /* ====== Sample product data ====== */
+    const products = [
+      {id:1,title:'Classic Cotton Burqa - কটন',price:1290,img:'https://via.placeholder.com/600x400.png?text=Burqa+1',badge:'New'},
+      {id:2,title:'Premium Abaya - সিল্ক ফিনিশ',price:2590,img:'https://via.placeholder.com/600x400.png?text=Abaya+2',badge:''},
+      {id:3,title:'Everyday Hijab - জার্সি',price:350,img:'https://via.placeholder.com/600x400.png?text=Hijab+3',badge:'Hot'},
+      {id:4,title:'Embroidered Niqab',price:990,img:'https://via.placeholder.com/600x400.png?text=Niqab+4',badge:''},
+      {id:5,title:'Travel Set (3 pcs)',price:1990,img:'https://via.placeholder.com/600x400.png?text=Set+5',badge:''},
+      {id:6,title:'Luxury Abaya - Gold Trim',price:4990,img:'https://via.placeholder.com/600x400.png?text=Abaya+6',badge:'Limited'},
+      {id:7,title:'Kids Modest Dress',price:890,img:'https://via.placeholder.com/600x400.png?text=Kids+7',badge:''},
+      {id:8,title:'Lace Hijab (Pack of 2)',price:650,img:'https://via.placeholder.com/600x400.png?text=Hijab+8',badge:'New'},
+    ];
+
+    function renderGrid(targetId, list) {
+      const el = document.getElementById(targetId);
+      el.innerHTML = '';
+      list.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div style="position:relative">
+            <img src="${p.img}" alt="${p.title}">
+            ${p.badge?`<div class="badge" style="top:10px;left:10px">${p.badge}</div>`:''}
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div class="prod-title">${p.title}</div>
+            <div class="meta"><div class="price">৳ ${p.price}</div><div><button style="padding:6px 10px;border-radius:6px;border:0;background:var(--primary);color:#fff;cursor:pointer" onclick="addToCart(${p.id})">Add</button></div></div>
+          </div>
+        `;
+        el.appendChild(card);
+      });
+    }
+
+    // initial render
+    renderGrid('productGrid', products.slice(0,4));
+    renderGrid('newGrid', products.slice(4));
+
+    function addToCart(id){
+      const p = products.find(x=>x.id===id);
+      alert(p.title + ' added to cart (demo).');
+    }
+
+    // simple search filter
+    document.getElementById('searchBtn').addEventListener('click', ()=>{
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+      if(!q){ renderGrid('productGrid', products.slice(0,4)); renderGrid('newGrid', products.slice(4)); return; }
+      const found = products.filter(p=>p.title.toLowerCase().includes(q));
+      renderGrid('productGrid', found.length?found:[]);
+      document.getElementById('newGrid').innerHTML = '';
+    });
+
+    // hero slider dots (demo)
+    const dots = document.querySelectorAll('.dot');
+    let active = 0;
+    setInterval(()=> {
+      dots[active].classList.remove('active');
+      active = (active+1)%dots.length;
+      dots[active].classList.add('active');
+    }, 3000);
+
+    function openWhatsApp(){
+      // change this number to your actual number
+      const num = '880171XXXXXXX';
+      const text = encodeURIComponent('Hello Mollah Zone, I want to ask about...');
+      window.open('https://wa.me/' + num + '?text=' + text, '_blank');
+    }
+
+  </script>
+</body>
+</html>
